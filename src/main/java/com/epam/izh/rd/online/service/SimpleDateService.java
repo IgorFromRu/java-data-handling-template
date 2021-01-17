@@ -1,8 +1,13 @@
 package com.epam.izh.rd.online.service;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.stream.Stream;
 
 public class SimpleDateService implements DateService {
 
@@ -14,7 +19,8 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public String parseDate(LocalDate localDate) {
-        return null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return simpleDateFormat.format(java.sql.Date.valueOf(localDate));
     }
 
     /**
@@ -25,7 +31,8 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public LocalDateTime parseString(String string) {
-        return null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(string, formatter);
     }
 
     /**
@@ -37,7 +44,7 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public String convertToCustomFormat(LocalDate localDate, DateTimeFormatter formatter) {
-        return null;
+        return String.valueOf(LocalDate.parse(localDate.toString(), formatter));
     }
 
     /**
@@ -47,7 +54,15 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public long getNextLeapYear() {
-        return 0;
+        Year year = Year.now();
+        long isLeapYear;
+        for (int i = year.getValue(); ; i++) {
+            if (Year.of(i).isLeap()) {
+                isLeapYear = i;
+                break;
+            }
+        }
+        return isLeapYear;
     }
 
     /**
@@ -57,7 +72,14 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public long getSecondsInYear(int year) {
-        return 0;
+        Year y = Year.of(year);
+        long sec;
+        if (y.isLeap()) {
+            sec = 366 * 24 * 60 * 60;
+        } else {
+            sec = 365 * 24 * 60 * 60;
+        }
+        return sec;
     }
 
 
