@@ -13,7 +13,8 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public String removeString(String base, String remove) {
-        return null; //TODO
+        String endResult = base.replace(remove, "");
+        return endResult;
     }
 
     /**
@@ -24,7 +25,11 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public boolean isQuestionString(String text) {
-        return false; //TODO
+        boolean isQuestion = false;
+        if (text.endsWith("?")) {
+            isQuestion = true;
+        }
+        return isQuestion;
     }
 
     /**
@@ -35,7 +40,11 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public String concatenate(String... elements) {
-        return null; //TODO
+        StringBuilder endResult = new StringBuilder();
+        for (String s : elements) {
+            endResult.append(s);
+        }
+        return endResult.toString();
     }
 
     /**
@@ -47,7 +56,18 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public String toJumpCase(String text) {
-        return null; //TODO
+        char[] charArray = text.toCharArray();
+        int counter = 1;
+        for (int i = 0; i < charArray.length; i++) {
+            if (counter % 2 != 0) {
+                charArray[i] = Character.toLowerCase(charArray[i]);
+                counter++;
+            } else {
+                charArray[i] = Character.toUpperCase(charArray[i]);
+                counter++;
+            }
+        }
+        return String.valueOf(charArray);
     }
 
     /**
@@ -59,6 +79,17 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public boolean isPalindrome(String string) {
-       return false; //TODO
+        if (string.length() == 0) {
+            return false;
+        }
+        string = string.toLowerCase().replace(" ", "");
+        for (int i = 0; i < string.length() / 2; i++) {
+            int firstIndex = i;
+            int lastIndex = string.length() - 1 - i;
+            if (string.charAt(firstIndex) != string.charAt(lastIndex)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
