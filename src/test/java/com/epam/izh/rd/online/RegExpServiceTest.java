@@ -6,6 +6,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegExpServiceTest {
@@ -19,7 +22,7 @@ public class RegExpServiceTest {
 
     @Test
     @DisplayName("Тест метода RegExpService.maskSensitiveData()")
-    void testMaskSensitiveData() {
+    void testMaskSensitiveData() throws IOException {
         assertEquals("Вчера вечером со счета номер 4301 **** **** 2140 был совершен перевод на счет 5042 **** ****" +
                 " 2043 в размере ${payment_amount} рублей. На счету осталось ${balance} рублей",
                 regExpService.maskSensitiveData());

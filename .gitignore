@@ -1,3 +1,7 @@
 target/
 .idea/
 /java-data-handling-template.iml
+/bin/
+/.classpath
+/.project
+/.settings/
