@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public interface RegExpService {
 
-    String maskSensitiveData() throws IOException;
+    String maskSensitiveData();
 
     String replacePlaceholders(double paymentAmount, double balance);
 }
